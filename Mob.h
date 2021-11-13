@@ -21,18 +21,18 @@ public:
     int experiencePoints;
     int level;
     std::vector<Item> inventory;
-    Item *activeWeapon = new Item();
-    Item *activeArmor = new Item();
-    Location *location = new Location();
+    Item activeWeapon;
+    Item activeArmor;
+    Location location;
 
     void show(std::vector<Item> list);
-    void Mob::equipItem(char identifier, Item *item);
-    std::atomic_bool hasEquiped(char identifier, Item *item);
-
-    void lookForItems();
+    void Mob::equipItem(Item item);
+    std::atomic_bool hasEquiped(Item item);
 
 private:
-    void storeAndEquip(std::atomic_bool store, Item *item);
+    void storeAndEquip(std::atomic_bool store, Item item);
+    void store(Item item);
+    void equip(Item item);
 };
 
 

@@ -8,14 +8,14 @@
 
 class Item {
 public:
-    Item();
+    char id;
     std::string name;
     int healthIncrease;
     int armorIncrease;
     int attackIncrease;
     std::string description;
 
-    Item createItem(std::string name, int healthIncrease, int armorIncrease, int attackIncrease);
+    Item createItem(char id, std::string name, int healthIncrease, int armorIncrease, int attackIncrease);
 };
 
 

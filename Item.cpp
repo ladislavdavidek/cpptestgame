@@ -5,12 +5,9 @@
 #include <iostream>
 #include "Item.h"
 
-Item::Item() {
-    std::cout << "Constructor called." << std::endl;
-}
-
-Item Item::createItem(std::string name, int healthIncrease, int armorIncrease, int attackIncrease) {
+Item Item::createItem(char id, std::string name, int healthIncrease, int armorIncrease, int attackIncrease) {
     Item item;
+    item.id = id;
     item.name = name;
     item.healthIncrease = healthIncrease;
     item.armorIncrease = armorIncrease;

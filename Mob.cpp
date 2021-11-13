@@ -13,32 +13,25 @@ void Mob::show(std::vector<Item> list) {
             std::cout << ") " + list[i].name << std::endl;
         }
     } else {
-        std::cout << "List is empty." << std::endl;
+        std::cout << "Empty." << std::endl;
     }
     
 }
 
-void Mob::equipItem(char identifier, Item *item) {
-
-    if (identifier == 'w') {
-        (hasEquiped(identifier, item)) ? storeAndEquip(true, item) : storeAndEquip(false, item);
-    }
-    else if (identifier == 'a') {
-        (hasEquiped(identifier, item)) ? storeAndEquip(true, item) : storeAndEquip(false, item);
-    }
-        
+void Mob::equipItem(Item item) {
+    hasEquiped(item) ? storeAndEquip(true, item) : storeAndEquip(false, item);
 }
 
-std::atomic_bool Mob::hasEquiped(char identifier, Item *item) {
-    if (identifier == 'w') {
-        if (this->activeWeapon->name.length() > 0) {
+std::atomic_bool Mob::hasEquiped(Item item) {
+    if (item.id == 'w') {
+        if (this->activeWeapon.name.length() > 0) {
             return true; 
         }
         else {
             return false;
         }
-    } else if (identifier == 'a') {
-        if (this->activeArmor) {
+    } else if (item.id == 'a') {
+        if (this->activeArmor.name.length() > 0) {
             return true;
         }
         else {
@@ -47,15 +40,29 @@ std::atomic_bool Mob::hasEquiped(char identifier, Item *item) {
     }
 }
 
-void Mob::storeAndEquip(std::atomic_bool store, Item *item) {
-    if (store) {
-        std::cout << "davam do inv" << std::endl;
-        this->inventory.push_back(*this->activeWeapon);
-        std::cout << "nasazuji novy" << std::endl;
-        this->activeWeapon = item;
+void Mob::storeAndEquip(std::atomic_bool storeBool, Item item) {
+    if (storeBool) {
+        store(item);
+        equip(item);
     } else {
-        std::cout << "nasazuji novy" << std::endl;
+        equip(item);
+    }
+}
+
+void Mob::store(Item item) {
+    if (item.id == 'w') {
+        this->inventory.push_back(this->activeWeapon);
+    }
+    else if (item.id == 'a') {
+        this->inventory.push_back(this->activeArmor);
+    }
+}
+void Mob::equip(Item item) {
+    if (item.id == 'w') {
         this->activeWeapon = item;
+    }
+    else if (item.id == 'a') {
+        this->activeArmor = item;
     }
 }
 
