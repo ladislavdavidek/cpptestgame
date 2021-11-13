@@ -3,7 +3,6 @@
 //
 
 #include <iostream>
-#include <vector>
 #include "Mob.h"
  
 void Mob::show(std::vector<Item> list) {
@@ -38,6 +37,14 @@ std::atomic_bool Mob::hasEquiped(Item item) {
             return false;
         }
     }
+}
+
+std::string Mob::getName() {
+    std::string name;
+    std::cout << "GAME: Who are you?" << std::endl << "HERO: My name is ";
+    //std::cin >> name;
+    name = "Tester \n";
+    return name;
 }
 
 void Mob::storeAndEquip(std::atomic_bool storeBool, Item item) {

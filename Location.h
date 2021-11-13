@@ -12,7 +12,7 @@ class Location {
 public:
     std::string name;
     std::string description;
-    std::vector <Item> items;
+    std::vector <Item>items;
 };
 
 

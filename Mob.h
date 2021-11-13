@@ -25,9 +25,12 @@ public:
     Item activeArmor;
     Location location;
 
+
     void show(std::vector<Item> list);
     void Mob::equipItem(Item item);
     std::atomic_bool hasEquiped(Item item);
+
+    static std::string getName();
 
 private:
     void storeAndEquip(std::atomic_bool store, Item item);

@@ -4,6 +4,10 @@
 
 #include <iostream>
 #include "Mob.h"
+#include "Item.h"
+#include "Generate.h"
+#include "Location.h"
+#include "CommandHandler.h"
 
 #ifndef UNTITLED2_GAME_H
 #define UNTITLED2_GAME_H
@@ -12,12 +16,10 @@ class Game {
 public:
     int round;
     std::atomic_bool isRunning;
+    CommandHandler cmdHandler;
     void init();
-
-private:
     void start();
     void stop();
-    static std::string getName();
 };
 
 #endif //UNTITLED2_GAME_H
