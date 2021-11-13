@@ -3,18 +3,20 @@
 //
 
 #include <iostream>
+#include "Mob.h"
+
 #ifndef UNTITLED2_GAME_H
 #define UNTITLED2_GAME_H
 
-#include "Mob.h"
-
 class Game {
 public:
-    static void init();
-
-private:
     int round;
     std::atomic_bool isRunning;
+    void init();
+
+private:
+    void start();
+    void stop();
     static std::string getName();
 };
 
