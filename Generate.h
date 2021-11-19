@@ -3,16 +3,16 @@
 //
 
 #include <iostream>
+#include "Mob.h"
+
 #ifndef UNTITLED2_GENERATE_H
 #define UNTITLED2_GENERATE_H
 
 
-#include "Mob.h"
-
 class Generate {
 public:
-    static Mob enemy();
-    static Mob player(Mob mob);
+    static Person enemy();
+    void player(Person* mob);
 };
 
 

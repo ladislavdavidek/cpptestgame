@@ -11,7 +11,7 @@
 #ifndef UNTITLED2_MOB_H
 #define UNTITLED2_MOB_H
 
-class Mob {
+class Person {
 public:
     std::string name;
     int health;
@@ -20,22 +20,28 @@ public:
     int gold;
     int experiencePoints;
     int level;
-    std::vector<Item> inventory;
-    Item activeWeapon;
-    Item activeArmor;
-    Location location;
+    std::vector<Item*> inventory;
+    Item* activeWeapon;
+    Item* activeArmor;
+    Location* location;
 
+    void show(std::vector<Item*> list);
+    void actualArmor();
+    void actualWeapon();
 
-    void show(std::vector<Item> list);
-    void Mob::equipItem(Item item);
-    std::atomic_bool hasEquiped(Item item);
+    void Person::equipItem(Item* item);
+    std::atomic_bool hasEquiped(Item* item);
 
-    static std::string getName();
+    void Person::pickUpItem(Item* item);
+    void Person::dropItem(Item* item);
+
+    std::string getName();
+    void showAvailableLocations();
 
 private:
-    void storeAndEquip(std::atomic_bool store, Item item);
-    void store(Item item);
-    void equip(Item item);
+    void storeAndEquip(std::atomic_bool store, Item* item);
+    void store(Item* item);
+    void equip(Item* item);
 };
 
 

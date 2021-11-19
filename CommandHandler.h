@@ -9,7 +9,7 @@
 
 class CommandHandler {
 public:
-	void CommandHandler::handle(Mob playerInstance, std::string command);
+	void handle(Person* playerInstance, std::string command);
 };
 
 

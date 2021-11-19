@@ -4,23 +4,19 @@
 
 #include <iostream>
 #include "Generate.h"
-#include "Mob.h"
 
-Mob Generate::enemy() {
-    Mob enemy;
+Person Generate::enemy() {
+    Person enemy;
     return enemy;
 }
 
-Mob Generate::player(Mob mob) {
-    Mob player;
+void Generate::player(Person* playerPtr) {
+    playerPtr->health = 100;
+    playerPtr->armor = 0;
+    playerPtr->attack = 0;
 
-    player.health = 100;
-    player.armor = 0;
-    player.attack = 0;
+    playerPtr->gold = 50;
+    playerPtr->experiencePoints = 0;
+    playerPtr->level = 1;
 
-    player.gold = 50;
-    player.experiencePoints = 0;
-    player.level = 1;
-
-    return player;
 }

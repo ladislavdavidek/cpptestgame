@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <string>
 #include "Mob.h"
 #include "Item.h"
 #include "Generate.h"
@@ -15,7 +16,7 @@
 class Game {
 public:
     int round;
-    std::atomic_bool isRunning;
+    bool isRunning;
     CommandHandler cmdHandler;
     void init();
     void start();
