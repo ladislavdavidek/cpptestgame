@@ -2,99 +2,132 @@
 // Created by Ladislav Davídek on 13.11.2021.
 //
 
-#include <iostream>
-#include <ostream>
-#include "Mob.h"
 #include "CommandHandler.h"
 
+/*
+    single word commands:
+
+    inv: i,
+    look: l,
+    stats: p,
+    armor: a,
+    weapon: w,
+    quit: q,
+    save: v,
+
+    go: g,
+    take: t,
+    drop: d,
+    equip: e,
+    fight: f,
+
+    use: u,
+    unequip: n,
+    examine: x,
+
+
+
+    word and num commands:
+
+    go: g,
+    take: t,
+    drop: d,
+    equip: e,
+    fight: f,
+
+
+
+    word and word commands:
+
+    use: u,
+    unequip: n,
+    examine: x,
+*/
 
 void CommandHandler::handle(Person* playerInstance, std::string command) {
     std::string cmd = command;
+    std::string functionCaller = cmd.substr(0, cmd.find(" "));
+    std::string functionArgument;
+    int cmdIndex;
 
-    if (cmd == "equipW") {
-        playerInstance->equipItem(playerInstance->inventory[0]);
-    }
+    std::regex singleWordComm("([A-z]+)");
+    std::regex wordAndNumComm("([A-z]+)[ ]([0-9]+)");
+    std::regex wordAndWordComm("([$][A-z]+)[ ]([A-z]+)");
 
-    if (cmd == "equipA") {
-        playerInstance->equipItem(playerInstance->inventory[1]);
+    if (doesCommandMatchRegex(cmd, singleWordComm)) {
+        singleWordCommands(playerInstance, functionCaller);
     }
+    else if (doesCommandMatchRegex(cmd, wordAndNumComm)) {
+        cmdIndex = std::stoi(cmd.substr(cmd.find(" ") + 1, -1)) - 1;
+        wordAndNumCommands(playerInstance, functionCaller, cmdIndex);
+        }
+    else if (doesCommandMatchRegex(cmd, wordAndWordComm)) {
+        functionArgument = cmd.substr(cmd.find(" ")+1, -1);
+        wordAndWordCommands(playerInstance, functionCaller, functionArgument);
+    }
+    else {
+        std::cout << "Unknown command" << std::endl;
+    }
+}
 
-    if (cmd == "pick 1") {
-        playerInstance->pickUpItem(playerInstance->location->items[0]);
-    }
+bool CommandHandler::doesCommandMatchRegex(std::string cmd, std::regex regx) {
+    if (std::regex_match(cmd, regx)) { return true; }
+    return false;
+}
 
-    if (cmd == "drop 2") {
-        playerInstance->dropItem(playerInstance->inventory[1]);
-    }
+void CommandHandler::singleWordCommands(Person* playerInstance, std::string cmd) {
+    if (cmd == "i") { playerInstance->showInventory(); }
 
-    if (cmd == "go") {
-        std::cout << "You can go to the... " << std::endl;
-        playerInstance->showAvailableLocations();
-    }
+    else if (cmd == "l") { playerInstance->lookAround(); }
 
-    if (cmd == "#{godmode}") {
-        std::cout << "LOL." << std::endl;
-    }
+    else if (cmd == "p") { playerInstance->showStats(); }
 
-    if (cmd == "collect 2") {
-        std::cout << "You tried to pick up the " + playerInstance->location->items[1]->name + ", but it was too heavy." << std::endl;
-    }
+    else if (cmd == "a") { playerInstance->actualArmor(); }
 
-    if (cmd == "go 1") {
-        std::cout << "You went to the north." << std::endl;
-        playerInstance->location = *&playerInstance->location->locations["north"];
-        std::cout << "GAME: You are in the ";
-        std::cout << playerInstance->location->name << std::endl;
-        std::cout << playerInstance->location->description << std::endl;
-    }
+    else if (cmd == "w") { playerInstance->actualWeapon(); }
 
-    if (cmd == "stats") {
-        std::cout << "Statistics:" << std::endl;
-        std::cout << "\nPLAYER: " << std::endl;
-        std::cout << "health: ";
-        std::cout << playerInstance->health << std::endl;
-        std::cout << "level: ";
-        std::cout << playerInstance->level << std::endl;
-        std::cout << "exp: ";
-        std::cout << playerInstance->experiencePoints << std::endl;
-        std::cout << "gold: ";
-        std::cout << playerInstance->gold << std::endl;
-        std::cout << "location: ";
-        std::cout << playerInstance->location->name << std::endl;
-        std::cout << "\nATTACK: " << std::endl;
-        playerInstance->actualWeapon();
-        std::cout << "rating: ";
-        std::cout << playerInstance->attack << std::endl;
-        std::cout << "\nDEFENSE: " << std::endl;
-        playerInstance->actualArmor();
-        std::cout << "rating: ";
-        std::cout << playerInstance->armor << std::endl;
-    }
+    else if (cmd == "g") { playerInstance->availableLocations(); }
 
-    if (cmd == "inv") {
-        std::cout << "Inventory:" << std::endl;
-        playerInstance->show(playerInstance->inventory);
-    }
+    else if (cmd == "t") { playerInstance->itemsToTake(); }
 
-    if (cmd == "armor") {
-        playerInstance->actualArmor();
-    }
+    else if (cmd == "d") { playerInstance->itemsToDrop(); }
 
-    if (cmd == "weapon") {
-        playerInstance->actualWeapon();
-    }
+    else if (cmd == "e") { playerInstance->itemsToEquip(); }
 
-    if (cmd == "loc") {
-        std::cout << "GAME: You are in the ";
-        std::cout << playerInstance->location->name << std::endl;
-    }
+    else if (cmd == "f") { playerInstance->attackableEntities(); }
 
-    if (cmd == "locDesc") {
-        std::cout << playerInstance->location->description << std::endl;
-    }
+    else if (cmd == "u") { playerInstance->itemsToUse(); }
 
-    if (cmd == "ls") {
-        std::cout << "On the ground lies:" << std::endl;
-        playerInstance->show(playerInstance->location->items);
-    }
+    else if (cmd == "n") { playerInstance->itemsToUnequip(); }
+
+    // toto ukazovat podle nastaveni obtiznosti
+    else if (cmd == "x") { playerInstance->thingsToExamine(); }
+
+    else { std::cout << "Unknown command" << std::endl; }
+}
+
+void CommandHandler::wordAndNumCommands(Person* playerInstance, std::string cmd, int cmdIndex) {
+    if (cmd == "g") { playerInstance->goTo(cmdIndex); }
+
+    else if (cmd == "t") { playerInstance->pickUpItem(playerInstance->location->items[cmdIndex]); }
+
+    else if (cmd == "d") { playerInstance->dropItem(playerInstance->inventory[cmdIndex]); }
+
+    else if (cmd == "e") { playerInstance->equipItem(playerInstance->inventory[cmdIndex]); }
+
+    else if (cmd == "f") { playerInstance->fight(cmdIndex); }
+
+    else if (cmd == "u") { playerInstance->use(cmdIndex); }
+    
+    else if (cmd == "n") { playerInstance->unequipItem(playerInstance->equippedItems[cmdIndex]); }
+
+    else if (cmd == "x") {}
+
+    else { std::cout << "Unknown command" << std::endl; }
+}
+
+void CommandHandler::wordAndWordCommands(Person* playerInstance, std::string cmd, std::string functionArgument) {
+    // cheats here :D just for developers:D
+    std::cout << "Cheat command" << std::endl;
+        
 }

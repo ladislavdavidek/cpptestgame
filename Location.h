@@ -14,10 +14,12 @@ class Location {
 public:
     std::string name;
     std::string description;
-    std::map<std::string, Location*> locations;
+    //bool examinated;
+    std::vector<Location*> locations;
+    std::vector<Item*> itemsToUse;
+    //std::vector<Item*> itemsToExaminate;
     std::vector<Item*> items;
 
-    void createLocation(std::string name, std::string description, std::map<std::string, Location*> locations, std::vector<Item*> items);
 };
 
 #endif //UNTITLED2_LOCATION_H

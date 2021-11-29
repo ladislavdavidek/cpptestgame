@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <string>
-#include "Mob.h"
+#include "Person.h"
 #include "Item.h"
 #include "Generate.h"
 #include "Location.h"
@@ -21,6 +21,7 @@ public:
     void init();
     void start();
     void stop();
+    void save();
 };
 
 #endif //UNTITLED2_GAME_H

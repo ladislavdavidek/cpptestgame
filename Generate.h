@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "Mob.h"
+#include "Person.h"
 
 #ifndef UNTITLED2_GENERATE_H
 #define UNTITLED2_GENERATE_H

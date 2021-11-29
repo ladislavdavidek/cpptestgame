@@ -57,7 +57,7 @@ build CMakeFiles\untitled2.dir\Game.cpp.obj: CXX_COMPILER__untitled2_Debug ..\..
   TARGET_COMPILE_PDB = CMakeFiles\untitled2.dir\
   TARGET_PDB = untitled2.pdb
 
-build CMakeFiles\untitled2.dir\Mob.cpp.obj: CXX_COMPILER__untitled2_Debug ..\..\..\Mob.cpp || cmake_object_order_depends_target_untitled2
+build CMakeFiles\untitled2.dir\Person.cpp.obj: CXX_COMPILER__untitled2_Debug ..\..\..\Person.cpp || cmake_object_order_depends_target_untitled2
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++14
   OBJECT_DIR = CMakeFiles\untitled2.dir
   OBJECT_FILE_DIR = CMakeFiles\untitled2.dir
@@ -92,6 +92,13 @@ build CMakeFiles\untitled2.dir\CommandHandler.cpp.obj: CXX_COMPILER__untitled2_D
   TARGET_COMPILE_PDB = CMakeFiles\untitled2.dir\
   TARGET_PDB = untitled2.pdb
 
+build CMakeFiles\untitled2.dir\Globals.cpp.obj: CXX_COMPILER__untitled2_Debug ..\..\..\Globals.cpp || cmake_object_order_depends_target_untitled2
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++14
+  OBJECT_DIR = CMakeFiles\untitled2.dir
+  OBJECT_FILE_DIR = CMakeFiles\untitled2.dir
+  TARGET_COMPILE_PDB = CMakeFiles\untitled2.dir\
+  TARGET_PDB = untitled2.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target untitled2
@@ -100,7 +107,7 @@ build CMakeFiles\untitled2.dir\CommandHandler.cpp.obj: CXX_COMPILER__untitled2_D
 #############################################
 # Link the executable untitled2.exe
 
-build untitled2.exe: CXX_EXECUTABLE_LINKER__untitled2_Debug CMakeFiles\untitled2.dir\main.cpp.obj CMakeFiles\untitled2.dir\Game.cpp.obj CMakeFiles\untitled2.dir\Mob.cpp.obj CMakeFiles\untitled2.dir\Generate.cpp.obj CMakeFiles\untitled2.dir\Loop.cpp.obj CMakeFiles\untitled2.dir\Item.cpp.obj CMakeFiles\untitled2.dir\CommandHandler.cpp.obj
+build untitled2.exe: CXX_EXECUTABLE_LINKER__untitled2_Debug CMakeFiles\untitled2.dir\main.cpp.obj CMakeFiles\untitled2.dir\Game.cpp.obj CMakeFiles\untitled2.dir\Person.cpp.obj CMakeFiles\untitled2.dir\Generate.cpp.obj CMakeFiles\untitled2.dir\Loop.cpp.obj CMakeFiles\untitled2.dir\Item.cpp.obj CMakeFiles\untitled2.dir\CommandHandler.cpp.obj CMakeFiles\untitled2.dir\Globals.cpp.obj
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

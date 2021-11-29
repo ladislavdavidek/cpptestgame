@@ -18,5 +18,4 @@ void Generate::player(Person* playerPtr) {
     playerPtr->gold = 50;
     playerPtr->experiencePoints = 0;
     playerPtr->level = 1;
-
 }
